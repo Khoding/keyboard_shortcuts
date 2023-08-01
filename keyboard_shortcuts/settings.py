@@ -71,7 +71,7 @@ ROOT_URLCONF = "keyboard_shortcuts.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR + "/keyboard_shortcuts/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -83,6 +83,8 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.request",)
 
 WSGI_APPLICATION = "keyboard_shortcuts.wsgi.application"
 

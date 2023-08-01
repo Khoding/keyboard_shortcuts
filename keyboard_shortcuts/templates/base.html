@@ -1,0 +1,46 @@
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Khodok's Shortcuts -
+      {% if title %}
+        {{ title }}
+      {% else %}
+        {% block title %}{% endblock title %}
+      {% endif %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="canonical" href="{{ CANONICAL_PATH }}">
+    <link rel="shortlink" href="{{ CANONICAL_PATH }}">
+
+    <meta name="theme-color" content="#B362FF">
+
+    {% block additional_js %}{% endblock additional_js %}
+    {% block additional_css %}{% endblock additional_css %}
+
+    {% comment %} <script defer src="{% static 'vendor/node_modules/alpinejs/dist/cdn.min.js' %}"></script> {% endcomment %}
+    <style>
+      [x-cloak] { display: none !important; }
+    </style>
+
+    {% comment %} {% block rel %} {% endcomment %}
+      <!-- base! favicon -->
+      {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"> {% endcomment %}
+
+      {% comment %} {% if not debug_flag %}
+        {% tailwind_preload_css %}
+      {% endif %}
+      {% tailwind_css %}
+    {% endblock rel %} {% endcomment %}
+  </head>
+
+  <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100">
+    {% block content %}{% endblock content %}
+  </body>
+</html>

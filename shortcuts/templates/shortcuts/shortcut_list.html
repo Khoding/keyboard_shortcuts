@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% for shortcut in objects %}
+      {{ shortcut }}
+      {{ shortcut.description }}
+    {% endfor %}
+{% endblock content %}
