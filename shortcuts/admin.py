@@ -12,12 +12,16 @@ class ShortcutAdmin(SimpleHistoryAdmin):
         "shortcut",
         "description",
         "slug",
-        "application",
         "user",
         "deleted_at",
     )
     ordering = ("-pk",)
-    prepopulated_fields = {"slug": ("description",)}
+    prepopulated_fields = {
+        "slug": (
+            "description",
+            "shortcut",
+        )
+    }
     list_filter = ("deleted_at",)
 
 

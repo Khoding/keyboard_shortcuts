@@ -3,6 +3,7 @@ import itertools
 from django.db import models
 from django.db.models import Q
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from django.utils import timezone
 
 import auto_prefetch
@@ -15,8 +16,8 @@ from keyboard_shortcuts import settings
 class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
     description = models.TextField()
-    application = auto_prefetch.ForeignKey(
-        "shortcuts.Application", on_delete=models.CASCADE
+    application = models.ManyToManyField(
+        "shortcuts.Application", related_name="shortcuts"
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -51,6 +52,9 @@ class Shortcut(auto_prefetch.Model):
                 # Truncate & Minus 1 for the hyphen.
                 self.slug = f"{orig[: max_length - len(str(x)) - 1]}-{x}"
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("shortcuts:shortcut_detail", kwargs={"slug": self.slug})
 
     def soft_delete(self):
         """Soft delete Category"""

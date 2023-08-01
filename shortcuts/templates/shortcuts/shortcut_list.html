@@ -3,7 +3,9 @@
 
 {% block content %}
     {% for shortcut in objects %}
-      {{ shortcut }}
-      {{ shortcut.description }}
+    <article class="mb-2">
+      <a href="{{ shortcut.get_absolute_url }}">{{ shortcut }}</a>
+      <div>{{ shortcut.description }}</div>
+    </article>
     {% endfor %}
 {% endblock content %}
