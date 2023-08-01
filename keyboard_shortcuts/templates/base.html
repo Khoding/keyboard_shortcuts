@@ -1,8 +1,25 @@
-{% load tailwind_tags %}
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      function colorScheme() {
+        const isDarkThemeSet = localStorage.theme === 'dark';
+        const isThemeStored = 'theme' in localStorage;
+        const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        try {
+          if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        } catch (_) {}
+      }
+
+      colorScheme()
+    </script>
     <meta charset="UTF-8">
     <title>
       Khodok's Shortcuts -
@@ -31,7 +48,7 @@
 
     {% block rel %}
       <!-- base! favicon -->
-      {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"> {% endcomment %}
+      <link rel="shortcut icon" type="image/png" href="{% static 'keyboard_shortcuts/img/favicon.ico' %}">
 
       {% if not debug_flag %}
         {% tailwind_preload_css %}
@@ -42,5 +59,25 @@
 
   <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100">
     {% block content %}{% endblock content %}
+
+
+    <script>
+      function themeOption(e) {
+        let optionValue = e.target.id
+        let localStorageValue = localStorage.getItem('theme')
+
+        if (optionValue === 'system') {
+          if (localStorageValue) {
+            localStorage.removeItem('theme')
+          }
+        } else if (optionValue === 'dark') {
+          localStorage.setItem('theme', 'dark')
+        } else if (optionValue === 'light') {
+          localStorage.setItem('theme', 'light')
+        }
+
+        colorScheme()
+      }
+    </script>
   </body>
 </html>
