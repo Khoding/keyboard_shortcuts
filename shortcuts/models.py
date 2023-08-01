@@ -12,21 +12,16 @@ from simple_history.models import HistoricalRecords
 from keyboard_shortcuts import settings
 
 
-# create a new model called Shortcut
 class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
     description = models.TextField()
-    application = models.ManyToManyField(
-        "shortcuts.Application", related_name="shortcuts"
-    )
+    application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     slug = models.SlugField(unique=True, max_length=200, help_text="Shortcut slug")
-    deleted_at = models.DateTimeField(
-        blank=True, null=True, help_text="Deletion date for soft delete"
-    )
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     history = HistoricalRecords()
 
     def __str__(self):
@@ -66,14 +61,11 @@ class Shortcut(auto_prefetch.Model):
         return self.shortcut
 
 
-# create a new model called Application
 class Application(auto_prefetch.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     slug = models.SlugField(unique=True, max_length=200, help_text="Shortcut slug")
-    deleted_at = models.DateTimeField(
-        blank=True, null=True, help_text="Deletion date for soft delete"
-    )
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     history = HistoricalRecords()
 
     def __str__(self):

@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load cards %}
 
 
 {% block content %}
-    {% for shortcut in objects %}
-    <article class="mb-2">
-      <a href="{{ shortcut.get_absolute_url }}">{{ shortcut }}</a>
-      <div>{{ shortcut.description }}</div>
-    </article>
+  <section class="mt-6 pt-10 grid gap-16 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-12">
+    {% for object in object_list %}
+      {% cards object %}
+    {% empty %}
+      Nothing found here.
     {% endfor %}
+  </section>
 {% endblock content %}

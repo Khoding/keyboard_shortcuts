@@ -18,16 +18,16 @@ class ShortcutListView(ListView):
 
     model = Shortcut
     template_name = "shortcuts/shortcut_list.html"
+    context_object_name = "object_list"
 
     def get_queryset(self):
         """Get queryset"""
-        Shortcut.objects.all()
+        return Shortcut.objects.filter(deleted_at__isnull=True)
 
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Shortcuts"
-        context["objects"] = Shortcut.objects.all()
         return context
 
 

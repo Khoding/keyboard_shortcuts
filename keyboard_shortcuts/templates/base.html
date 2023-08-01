@@ -53,7 +53,13 @@
   </head>
 
   <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100">
-    {% block content %}{% endblock content %}
+    <main class="pt-8 pb-12 lg:pt-16 lg:pb-20">
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% block content %}
+        {% endblock content %}
+      </section>
+    </main>
+
 
 
     <script>
