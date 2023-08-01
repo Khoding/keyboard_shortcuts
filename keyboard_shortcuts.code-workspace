@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "editor.autoIndent": "full",
+        "editor.codeActionsOnSave": {"source.fixAll": false},
+        "git.ignoreLimitWarning": true,
+        "css.validate": false,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "tailwindCSS.includeLanguages": {
+            "plaintext": "html"
+        },
+        "tailwindCSS.emmetCompletions": true,
+        "explorer.excludeGitIgnore": false,
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter"
+        }
+    }
+}
