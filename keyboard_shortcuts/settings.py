@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import environ
 
-root = environ.Path(__file__) - 3  # root of project
+root = environ.Path(__file__) - 2  # root of project
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(root() + "/.env")  # reading .env file
 
@@ -33,11 +33,27 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    "django.contrib.sites",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Accounts
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.discord",
+    "allauth.socialaccount.providers.github",
+    "accounts",
+    # Tailwind
+    "django_browser_reload",
+    "tailwind",
+    "heroicons",
+    # "theme",
+    # applications
+    "shortcuts",
 ]
 
 MIDDLEWARE = [
@@ -72,18 +88,39 @@ WSGI_APPLICATION = "keyboard_shortcuts.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/stable/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            "read_default_file": BASE_DIR + "/my.cnf",
+            "init_command": "SET sql_mode='STRICT_ALL_TABLES'; SET default_storage_engine=INNODB;",
+            "charset": "utf8mb4",
+            "use_unicode": True,
+        },
+        "CONN_MAX_AGE": 60,
     }
 }
 
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+AUTHENTICATION_BACKENDS = (
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
