@@ -16,7 +16,7 @@ class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
     description = models.TextField()
     how_to_activate = models.TextField(
-        help_text="If the shortcut isn't possible without some other action, describe it here."
+        blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."
     )
     application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
     default_shortcut = auto_prefetch.ForeignKey(
