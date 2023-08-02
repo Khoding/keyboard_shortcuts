@@ -1,5 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {{ shortcut }}
+  <section class="prose prose-xl dark:prose-invert">
+    <h1>{{ shortcut }}</h1>
+    <p>{{ shortcut.description }}</p>
+
+    {% if shortcut.how_to_activate %}
+      <p>{{ shortcut.how_to_activate }}</p>
+    {% endif %}
+
+    {% for sh in shortcut.default.all %}
+      {% if forloop.first %}
+        <h2>Default shortcut</h2>
+      {% endif %}
+
+      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+    {% endfor %}
+
+    {% for sh in shortcut.alt.all %}
+      {% if forloop.first %}
+        <h2>Alternative shortcut</h2>
+      {% endif %}
+
+      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+    {% endfor %}
+
+    {% for sh in shortcut.related.all %}
+      {% if forloop.first %}
+        <h2>Related shortcut</h2>
+      {% endif %}
+
+      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+    {% endfor %}
+  </section>
 {% endblock content %}

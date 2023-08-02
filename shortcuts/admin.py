@@ -11,10 +11,7 @@ class ShortcutAdmin(SimpleHistoryAdmin):
 
     list_display = (
         "shortcut",
-        "description",
-        "alt_shortcut",
-        "default_shortcut",
-        "how_to_activate",
+        "short_description",
         "slug",
         "user",
         "deleted_at",
@@ -22,7 +19,7 @@ class ShortcutAdmin(SimpleHistoryAdmin):
     ordering = ("-pk",)
     prepopulated_fields = {
         "slug": (
-            "description",
+            "short_description",
             "shortcut",
         )
     }

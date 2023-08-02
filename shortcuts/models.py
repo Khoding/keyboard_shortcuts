@@ -14,17 +14,15 @@ from keyboard_shortcuts import settings
 
 class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=50)
     description = models.TextField()
     how_to_activate = models.TextField(
         blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."
     )
     application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
-    default_shortcut = auto_prefetch.ForeignKey(
-        "self", on_delete=models.CASCADE, blank=True, null=True, related_name="related_shortcut"
-    )
-    alt_shortcut = auto_prefetch.ForeignKey(
-        "self", on_delete=models.CASCADE, blank=True, null=True, related_name="alt"
-    )
+    default = models.ManyToManyField("self", blank=True)
+    alternative = models.ManyToManyField("self", blank=True)
+    related = models.ManyToManyField("self", blank=True)
     user = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -40,7 +38,7 @@ class Shortcut(auto_prefetch.Model):
         """Save Post"""
         if not self.slug:
             max_length = self._meta.get_field("slug").max_length
-            self.slug = orig = slugify(self.title)[:max_length]
+            self.slug = orig = slugify(self.title, self.short_description)[:max_length]
             for x in itertools.count(2):
                 if (
                     self.pk
