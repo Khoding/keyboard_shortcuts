@@ -14,7 +14,7 @@
     {% if shortcut.default %}
       <h2>Default shortcut</h2>
 
-      <a href="{{ shortcut.get_absolute_url }}" class="hover:no-underline">{{ shortcut }}</a>
+      <a href="{{ shortcut.get_absolute_url }}" class="hover:no-underline">{{ shortcut.default }}</a>
     {% endif %}
 
     {% for sh in shortcut.modified.all %}
