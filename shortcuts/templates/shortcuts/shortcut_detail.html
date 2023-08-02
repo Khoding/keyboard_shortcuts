@@ -19,9 +19,9 @@
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
     {% endfor %}
 
-    {% for sh in shortcut.alt.all %}
+    {% for sh in shortcut.modified.all %}
       {% if forloop.first %}
-        <h2>Alternative shortcut</h2>
+        <h2>Modified shortcut</h2>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>

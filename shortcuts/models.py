@@ -20,8 +20,7 @@ class Shortcut(auto_prefetch.Model):
         blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."
     )
     application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
-    default = models.ManyToManyField("self", blank=True)
-    alternative = models.ManyToManyField("self", blank=True)
+    default = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True, related_name="modified")
     related = models.ManyToManyField("self", blank=True)
     none_default = models.BooleanField(default=False)
     user = auto_prefetch.ForeignKey(
