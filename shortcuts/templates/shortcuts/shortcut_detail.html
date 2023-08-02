@@ -43,7 +43,7 @@
         <h2>Applications</h2>
       {% endif %}
 
-      <a href="{{ application.get_absolute_url }}">{{ application }}</a>
+      <a href="{{ application.get_absolute_url }}" class="hover:no-underline">{{ application }}</a>
     {% endfor %}
   </section>
 {% endblock content %}
