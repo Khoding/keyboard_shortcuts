@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <a href="{% url 'shortcuts:shortcut_list' %}">Home</a>
+
   <section class="prose prose-xl dark:prose-invert">
     <h1>{{ shortcut }}</h1>
     <p>{{ shortcut.description }}</p>
