@@ -1,4 +1,3 @@
-import auto_prefetch
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -38,9 +37,7 @@ class CustomUser(AbstractUser):
 
     def get_absolute_admin_update_url(self):
         """Get the absolute admin update url"""
-        return reverse(
-            "admin:accounts_customuser_change", kwargs={"object_id": self.pk}
-        )
+        return reverse("admin:accounts_customuser_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
         """Get the absolute index view url"""

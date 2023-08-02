@@ -14,11 +14,7 @@ from allauth.account.views import (
 )
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 
-
-from .forms import (
-    CustomUserChangeForm,
-    CustomUserCreationForm,
-)
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
 
@@ -58,12 +54,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = "Profile • " + str(
-            self.model.objects.get(username=kwargs["object"])
-        )
-        context["description"] = str(
-            self.model.objects.get(username=kwargs["object"]).bio
-        )
+        context["title"] = "Profile • " + str(self.model.objects.get(username=kwargs["object"]))
+        context["description"] = str(self.model.objects.get(username=kwargs["object"]).bio)
         context["view_as"] = self.view_as
         return context
 

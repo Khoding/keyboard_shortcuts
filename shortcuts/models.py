@@ -15,8 +15,17 @@ from keyboard_shortcuts import settings
 class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
     description = models.TextField()
+    how_to_activate = models.TextField(
+        help_text="If the shortcut isn't possible without some other action, describe it here."
+    )
     application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
-    user = models.ForeignKey(
+    default_shortcut = auto_prefetch.ForeignKey(
+        "self", on_delete=models.CASCADE, blank=True, null=True, related_name="related_shortcut"
+    )
+    alt_shortcut = auto_prefetch.ForeignKey(
+        "self", on_delete=models.CASCADE, blank=True, null=True, related_name="alt"
+    )
+    user = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )

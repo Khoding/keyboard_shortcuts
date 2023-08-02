@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from shortcuts.models import Shortcut, Application
 from simple_history.admin import SimpleHistoryAdmin
+
+from shortcuts.models import Application, Shortcut
 
 
 @admin.register(Shortcut)
@@ -11,6 +12,9 @@ class ShortcutAdmin(SimpleHistoryAdmin):
     list_display = (
         "shortcut",
         "description",
+        "alt_shortcut",
+        "default_shortcut",
+        "how_to_activate",
         "slug",
         "user",
         "deleted_at",

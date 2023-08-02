@@ -1,7 +1,7 @@
 from django.http import Http404
+from django.views.generic import DetailView, ListView
+
 from shortcuts.models import Shortcut
-from django.views.generic import ListView
-from django.views.generic import DetailView
 
 
 class ShortcutListView(ListView):
