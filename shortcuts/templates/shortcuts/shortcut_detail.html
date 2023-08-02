@@ -34,6 +34,6 @@
     {% endfor %}
 
     <h2>Is default none?</h2>
-    {{ shortcut.none_default|yesno }}
+    {{ shortcut.none_default|yesno|capfirst }}
   </section>
 {% endblock content %}
