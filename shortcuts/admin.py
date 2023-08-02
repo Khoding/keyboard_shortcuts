@@ -11,9 +11,9 @@ class ShortcutAdmin(SimpleHistoryAdmin):
 
     list_display = (
         "shortcut",
+        "default",
         "short_description",
         "slug",
-        "user",
         "deleted_at",
     )
     ordering = ("-pk",)
@@ -23,7 +23,7 @@ class ShortcutAdmin(SimpleHistoryAdmin):
             "shortcut",
         )
     }
-    list_filter = ("deleted_at",)
+    list_filter = ("deleted_at", "none_default")
 
 
 @admin.register(Application)
