@@ -1,4 +1,9 @@
 <article>
+  <a href="{{ object.application.first.get_absolute_url }}" class="inline-block" title="Go to application: '{{ object.application.first }}'" tabindex="0">
+    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
+      {{ object.application.first }} <span class="sr-only">Application</span>
+    </span>
+  </a>
   <section>
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-950 dark:text-jumbo-100 hover:underline" title="Go to: '{{ object }}'">
       {{ object }}

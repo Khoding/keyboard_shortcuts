@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <a href="{% url 'shortcuts:shortcut_list' %}">Home</a>
+  <div class="mb-2">
+    <a href="{% url 'shortcuts:shortcut_list' %}" class="underline hover:no-underline">Home</a>
+  </div>
 
   <section class="prose prose-xl dark:prose-invert">
     <h1>{{ shortcut }}</h1>
@@ -25,15 +27,23 @@
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
     {% endfor %}
 
+    <h3>Is default none?</h3>
+    {{ shortcut.none_default|yesno|capfirst }}
+
     {% for sh in shortcut.related.all %}
       {% if forloop.first %}
-        <h2>Related shortcut</h2>
+        <h2>Related shortcuts</h2>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
     {% endfor %}
 
-    <h2>Is default none?</h2>
-    {{ shortcut.none_default|yesno|capfirst }}
+    {% for application in shortcut.application.all %}
+      {% if forloop.first %}
+        <h2>Applications</h2>
+      {% endif %}
+
+      <a href="{{ application.get_absolute_url }}">{{ application }}</a>
+    {% endfor %}
   </section>
 {% endblock content %}

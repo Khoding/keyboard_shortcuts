@@ -99,6 +99,9 @@ class Application(auto_prefetch.Model):
                 self.slug = f"{orig[: max_length - len(str(x)) - 1]}-{x}"
         return super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("shortcuts:shortcut_in_application_list", kwargs={"slug": self.slug})
+
     def soft_delete(self):
         """Soft delete Category"""
         self.deleted_at = timezone.now()
