@@ -23,6 +23,7 @@ class Shortcut(auto_prefetch.Model):
     default = models.ManyToManyField("self", blank=True)
     alternative = models.ManyToManyField("self", blank=True)
     related = models.ManyToManyField("self", blank=True)
+    has_none_default = models.BooleanField(default=False)
     user = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

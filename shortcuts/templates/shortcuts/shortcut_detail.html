@@ -32,5 +32,8 @@
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
     {% endfor %}
+
+    <h2>Not set by default?</h2>
+    {{ shortcut.has_none_default|yesno }}
   </section>
 {% endblock content %}
