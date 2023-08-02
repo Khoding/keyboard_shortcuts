@@ -11,12 +11,10 @@
       <p>{{ shortcut.how_to_activate }}</p>
     {% endif %}
 
-    {% for sh in shortcut.default.all %}
-      {% if forloop.first %}
-        <h2>Default shortcut</h2>
-      {% endif %}
+    {% if shortcut.default %}
+      <h2>Default shortcut</h2>
 
-      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+      <a href="{{ shortcut.get_absolute_url }}" class="hover:no-underline">{{ shortcut }}</a>
     {% endfor %}
 
     {% for sh in shortcut.modified.all %}
