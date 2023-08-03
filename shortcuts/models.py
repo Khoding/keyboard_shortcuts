@@ -1,7 +1,7 @@
 import itertools
 
 from django.db import models
-from django.db.models import Q
+from django.db.models import F, Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -16,18 +16,20 @@ class Shortcut(auto_prefetch.Model):
     shortcut = models.CharField(max_length=100)
     short_description = models.CharField(max_length=50)
     description = models.TextField()
+    prefix = models.CharField(max_length=100, blank=True, null=True)
     how_to_activate = models.TextField(
         blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."
     )
+    when = models.TextField(blank=True, null=True, help_text="When this shortcut works.")
     application = models.ManyToManyField("shortcuts.Application", related_name="shortcuts")
     default = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True, related_name="modified")
     related = models.ManyToManyField("self", blank=True)
-    none_default = models.BooleanField(default=False)
     user = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     slug = models.SlugField(unique=True, max_length=200, help_text="Shortcut slug")
+    clicks = models.IntegerField(default=0, help_text="How many times the shortcut has been seen")
     deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     history = HistoricalRecords()
 
@@ -55,8 +57,22 @@ class Shortcut(auto_prefetch.Model):
                 self.slug = f"{orig[: max_length - len(str(x)) - 1]}-{x}"
         return super().save(*args, **kwargs)
 
+    def save_without_historical_record(self, *args, **kwargs):
+        """Save Post without Historical Record"""
+        self.skip_history_when_saving = True  # skipcq: PYL-W0201
+        try:
+            ret = self.save(*args, **kwargs)
+        finally:
+            del self.skip_history_when_saving
+        return ret
+
     def get_absolute_url(self):
         return reverse("shortcuts:shortcut_detail", kwargs={"slug": self.slug})
+
+    def clicked(self):
+        """Clicked Post"""
+        self.clicks = F("clicks") + 1
+        self.save_without_historical_record(update_fields=["clicks"])
 
     def soft_delete(self):
         """Soft delete Category"""

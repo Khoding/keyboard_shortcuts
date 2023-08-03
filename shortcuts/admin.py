@@ -23,7 +23,7 @@ class ShortcutAdmin(SimpleHistoryAdmin):
             "shortcut",
         )
     }
-    list_filter = ("deleted_at", "none_default")
+    list_filter = ("deleted_at",)
 
 
 @admin.register(Application)

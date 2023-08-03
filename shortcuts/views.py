@@ -50,6 +50,7 @@ class ShortcutDetailView(DetailView):
     def get_object(self, queryset=None):
         """Get object"""
         obj = super(ShortcutDetailView, self).get_object(queryset=queryset)
+        obj.clicked()
         if obj.deleted_at:
             raise Http404
         return super().get_object()

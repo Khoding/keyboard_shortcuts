@@ -7,7 +7,7 @@
 
   <section class="prose prose-xl dark:prose-invert">
     <h1>{{ shortcut }}</h1>
-    <p>{{ shortcut.description }}</p>
+    <p>{% firstof shortcut.prefix "" %} {{ shortcut.description }}</p>
 
     {% if shortcut.how_to_activate %}
       <p>{{ shortcut.how_to_activate }}</p>
@@ -21,14 +21,11 @@
 
     {% for sh in shortcut.modified.all %}
       {% if forloop.first %}
-        <h2>Modified shortcut</h2>
+        <h2>Modified shortcuts</h2>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
     {% endfor %}
-
-    <h3>Is default none?</h3>
-    {{ shortcut.none_default|yesno|capfirst }}
 
     {% for sh in shortcut.related.all %}
       {% if forloop.first %}
@@ -45,5 +42,14 @@
 
       <a href="{{ application.get_absolute_url }}" class="hover:no-underline">{{ application }}</a>
     {% endfor %}
+
+    {% if shortcut.when %}
+      <h2>When</h2>
+      {{ shortcut.when }}
+    {% endif %}
+
+    <div>
+      {{ shortcut.clicks }} click{{ shortcut.clicks|pluralize }}
+    </div>
   </section>
 {% endblock content %}
