@@ -52,7 +52,7 @@
     {% endblock rel %}
   </head>
 
-  <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100" x-data="{ links: [] }" x-init="links = await(await fetch('/api/shortcuts/?format=json')).json()">
+  <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100" x-data="{ links: [] }" x-init="links = await(await fetch('https://khoshortcuts.eu.pythonanywhere.com/api/shortcuts/?format=json', { mode: 'no-cors' })).json()">
     <div class="relative z-10" x-data="{ open: false }" role="dialog" aria-modal="true">
       <button class="mb-2" @click="open=!open">Rechercher</button>
 
