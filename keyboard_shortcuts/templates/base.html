@@ -63,6 +63,7 @@
                       items: [],
                       get filteredItems() {
                           let result = []
+                          console.log(result)
                           result = links.map(({ title }) => title)
                           this.items = result
                           return this.items.filter(
