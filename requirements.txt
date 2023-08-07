@@ -58,7 +58,9 @@ django-tailwind==3.6.0
 django-widget-tweaks==1.4.12
     # via -r requirements.in
 djangorestframework==3.14.0
-    # via drf-yasg
+    # via
+    #   -r requirements.in
+    #   drf-yasg
 drf-yasg==1.21.7
     # via -r requirements.in
 heroicons[django]==2.4.0

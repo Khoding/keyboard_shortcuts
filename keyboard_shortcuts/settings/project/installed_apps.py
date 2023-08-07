@@ -24,4 +24,5 @@ INSTALLED_APPS = [
     "theme",
     # applications
     "shortcuts",
+    "rest_framework",
 ]

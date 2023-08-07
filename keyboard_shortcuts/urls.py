@@ -17,9 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from django.urls import include, path
+from rest_framework import routers
+from shortcuts_api import views
+
+router = routers.DefaultRouter()
+router.register(r"shortcuts", views.ShortcutViewSet)
+router.register(r"applications", views.ApplicationViewSet)
+
 urlpatterns = [
     path("", include("shortcuts.urls")),
     path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     # User Management
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("allauth.urls")),

@@ -1,4 +1,5 @@
 django
+djangorestframework
 django-environ
 django-allauth
 django-robots
