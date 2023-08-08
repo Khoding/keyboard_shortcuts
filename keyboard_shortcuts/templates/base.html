@@ -80,8 +80,7 @@
                       search: '',
                       items: [],
                       get filteredItems() {
-                          let result = []
-                          this.items = result
+                          this.items = links
                           return this.items.filter(
                               i => i.match(this.search)
                           )
