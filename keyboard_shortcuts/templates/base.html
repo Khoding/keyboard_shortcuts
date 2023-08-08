@@ -64,10 +64,13 @@
         // Storing data in form of JSON
         data = await response.json();
       }
+
+      getapi(api_url);
+
     </script>
   </head>
 
-  <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100" x-data="{ links: [] }" x-init="links = [...data]">
+  <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100" x-data="{ links: [] }" x-init="links = data">
     <div class="relative z-10" x-data="{ open: false }" role="dialog" aria-modal="true">
       <button class="mb-2" @click="open=!open">Rechercher</button>
 
@@ -77,12 +80,15 @@
                       search: '',
                       items: [],
                       get filteredItems() {
-                          getapi(api_url);
+
+                          for (let name of data) {
+                              this.items = name.shortcut
+                          }
 
                           this.items = data.map(i => i.shortcut)
-                          console.log(this.items)
-                          console.log(data)
-                          console.log(links)
+                          console.log('this.items' + this.items)
+                          console.log('data' + data)
+
                           return this.items.filter(
                               i => i.match(this.search)
                           )
