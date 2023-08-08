@@ -80,7 +80,7 @@
                       search: '',
                       items: [],
                       get filteredItems() {
-                          this.items = links
+                          this.items = data.map(i => i.shortcut)
                           return this.items.filter(
                               i => i.match(this.search)
                           )
