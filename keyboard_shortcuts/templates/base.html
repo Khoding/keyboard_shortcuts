@@ -81,6 +81,7 @@
                       items: [],
                       get filteredItems() {
                           this.items = data.map(i => i.shortcut)
+                          console.log(this.items)
                           return this.items.filter(
                               i => i.match(this.search)
                           )
