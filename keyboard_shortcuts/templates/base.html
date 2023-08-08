@@ -85,9 +85,8 @@
                               this.items = name.shortcut
                           }
 
-                          this.items = data.map(i => i.shortcut)
-                          console.log('this.items' + this.items)
-                          console.log('data' + data)
+                          console.log('this.items ' + this.items)
+                          console.log('data ' + data)
 
                           return this.items.filter(
                               i => i.match(this.search)
