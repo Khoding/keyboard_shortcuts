@@ -62,7 +62,7 @@
         const response = await fetch(url, { mode: 'no-cors' });
 
         // Storing data in form of JSON
-        data = await response;
+        data = await response.json();
       }
 
       // Calling that async function
