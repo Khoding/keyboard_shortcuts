@@ -64,9 +64,6 @@
         // Storing data in form of JSON
         data = await response.json();
       }
-
-      // Calling that async function
-      getapi(api_url);
     </script>
   </head>
 
@@ -80,6 +77,8 @@
                       search: '',
                       items: [],
                       get filteredItems() {
+                          getapi(api_url);
+
                           this.items = data.map(i => i.shortcut)
                           console.log(this.items)
                           console.log(data)
