@@ -82,6 +82,8 @@
                       get filteredItems() {
                           this.items = data.map(i => i.shortcut)
                           console.log(this.items)
+                          console.log(data)
+                          console.log(links)
                           return this.items.filter(
                               i => i.match(this.search)
                           )
