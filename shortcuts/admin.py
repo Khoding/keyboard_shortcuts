@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from simple_history.admin import SimpleHistoryAdmin
 
-from shortcuts.models import Application, Shortcut
+from shortcuts.models import Application, Category, Shortcut
 
 
 @admin.register(Shortcut)
@@ -13,6 +13,7 @@ class ShortcutAdmin(SimpleHistoryAdmin):
         "shortcut",
         "default",
         "short_description",
+        "order",
         "slug",
         "deleted_at",
     )
@@ -29,6 +30,16 @@ class ShortcutAdmin(SimpleHistoryAdmin):
 @admin.register(Application)
 class ApplicationAdmin(SimpleHistoryAdmin):
     """ApplicationAdmin Class"""
+
+    list_display = ("title", "slug", "deleted_at")
+    ordering = ("-pk",)
+    prepopulated_fields = {"slug": ("title",)}
+    list_filter = ("deleted_at",)
+
+
+@admin.register(Category)
+class CategoryAdmin(SimpleHistoryAdmin):
+    """CategoryAdmin Class"""
 
     list_display = ("title", "slug", "deleted_at")
     ordering = ("-pk",)

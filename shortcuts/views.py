@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
-from shortcuts.models import Application, Shortcut
+from shortcuts.models import Application, Category, Shortcut
 
 
 class ShortcutListView(ListView):
@@ -59,6 +59,34 @@ class ShortcutDetailView(DetailView):
         """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = f"Shortcut '{self.object.title}'"
+        return context
+
+
+class ShortcutInCategoryListView(ListView):
+    """ShortcutInCategoryListView List View
+
+    List View for Shortcuts in Category
+
+    Args:
+        ListView (ListView): Lists elements
+
+    Returns:
+        posts: A list of posts
+    """
+
+    model = Shortcut
+    template_name = "shortcuts/shortcut_list.html"
+    context_object_name = "object_list"
+
+    def get_queryset(self):
+        """Get queryset"""
+        self.Category = get_object_or_404(Category, slug=self.kwargs["slug"])
+        return Shortcut.objects.filter(Category=self.Category, deleted_at__isnull=True)
+
+    def get_context_data(self, **kwargs):
+        """Get context data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = f"Shortcuts in {self.Category.title}"
         return context
 
 
