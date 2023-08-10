@@ -99,6 +99,10 @@ class Category(auto_prefetch.Model):
     deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     history = HistoricalRecords()
 
+    class Meta:
+        base_manager_name = "prefetch_manager"
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.title
 
