@@ -39,7 +39,7 @@ class Shortcut(auto_prefetch.Model):
 
     class Meta:
         base_manager_name = "prefetch_manager"
-        ordering = ["order", "shortcut"]
+        ordering = ["order", "-pk"]
 
     def __str__(self):
         return self.title
