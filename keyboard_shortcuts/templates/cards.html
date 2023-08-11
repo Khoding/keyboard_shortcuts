@@ -8,7 +8,10 @@
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-950 dark:text-jumbo-100 hover:underline" title="Go to: '{{ object }}'">
       {{ object }}
     </a>
-    <p class="mt-3 text-base dark:text-jumbo-100">
+    <p class="mt-3 font-semibold dark:text-jumbo-100">
+      {{ object.shortcut }}
+    </p>
+    <p class="mt-3 dark:text-jumbo-100">
       {{ object.description }}
     </p>
   </section>

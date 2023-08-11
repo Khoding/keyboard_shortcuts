@@ -74,19 +74,19 @@ class ShortcutInCategoryListView(ListView):
         posts: A list of posts
     """
 
-    model = Shortcut
+    model = Category
     template_name = "shortcuts/shortcut_list.html"
     context_object_name = "object_list"
 
     def get_queryset(self):
         """Get queryset"""
-        self.Category = get_object_or_404(Category, slug=self.kwargs["slug"])
-        return Shortcut.objects.filter(Category=self.Category, deleted_at__isnull=True)
+        self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
+        return Shortcut.objects.filter(categories=self.category, deleted_at__isnull=True)
 
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = f"Shortcuts in {self.Category.title}"
+        context["title"] = f"Shortcuts in {self.category.title}"
         return context
 
 

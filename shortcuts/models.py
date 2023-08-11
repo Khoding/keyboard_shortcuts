@@ -13,8 +13,11 @@ from keyboard_shortcuts import settings
 
 
 class Shortcut(auto_prefetch.Model):
-    shortcut = models.CharField(max_length=100)
-    short_description = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    key = models.CharField(max_length=100)
+    key_in_app = models.CharField(
+        max_length=100, blank=True, null=True, help_text="Basically the key but as like 'shift+alt+oem_period'"
+    )
     description = models.TextField()
     how_to_activate = models.TextField(
         blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."
@@ -48,7 +51,7 @@ class Shortcut(auto_prefetch.Model):
         """Save Post"""
         if not self.slug:
             max_length = self._meta.get_field("slug").max_length
-            self.slug = orig = slugify(self.title, self.short_description)[:max_length]
+            self.slug = orig = slugify(self.title, self.key)[:max_length]
             for x in itertools.count(2):
                 if (
                     self.pk
@@ -87,10 +90,6 @@ class Shortcut(auto_prefetch.Model):
         self.deleted_at = timezone.now()
         self.save()
 
-    @property
-    def title(self):
-        return self.shortcut
-
 
 class Category(auto_prefetch.Model):
     title = models.CharField(max_length=100)
@@ -128,7 +127,7 @@ class Category(auto_prefetch.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("shortcuts:category_detail", kwargs={"slug": self.slug})
+        return reverse("shortcuts:shortcut_in_category_list", kwargs={"slug": self.slug})
 
     def soft_delete(self):
         """Soft delete Category"""
