@@ -7,6 +7,8 @@
 
   <section class="prose prose-xl dark:prose-invert">
     <h1>{{ shortcut }}</h1>
+    <h2>{{ shortcut.key }}</h2>
+
     <p>{% firstof shortcut.prefix "" %} {{ shortcut.description }}</p>
 
     {% if shortcut.how_to_activate %}
@@ -14,14 +16,14 @@
     {% endif %}
 
     {% if shortcut.default %}
-      <h2>Default shortcut</h2>
+      <h3>Default shortcut</h3>
 
       <a href="{{ shortcut.default.get_absolute_url }}" class="hover:no-underline">{{ shortcut.default }}</a>
     {% endif %}
 
     {% for sh in shortcut.modified.all %}
       {% if forloop.first %}
-        <h2>Modified shortcuts</h2>
+        <h3>Modified shortcuts</h3>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
@@ -29,7 +31,7 @@
 
     {% for sh in shortcut.alternative.all %}
       {% if forloop.first %}
-        <h2>Alternative shortcuts</h2>
+        <h3>Alternative shortcuts</h3>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
@@ -37,7 +39,7 @@
 
     {% for sh in shortcut.related.all %}
       {% if forloop.first %}
-        <h2>Related shortcuts</h2>
+        <h3>Related shortcuts</h3>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
@@ -45,7 +47,7 @@
 
     {% for application in shortcut.application.all %}
       {% if forloop.first %}
-        <h2>Applications</h2>
+        <h3>Applications</h3>
       {% endif %}
 
       <a href="{{ application.get_absolute_url }}" class="hover:no-underline">{{ application }}</a>
@@ -53,14 +55,14 @@
 
     {% for category in shortcut.categories.all %}
       {% if forloop.first %}
-        <h2>Categories</h2>
+        <h3>Categories</h3>
       {% endif %}
 
       <a href="{{ category.get_absolute_url }}" class="hover:no-underline">{{ category }}</a>
     {% endfor %}
 
     {% if shortcut.when %}
-      <h2>When</h2>
+      <h3>When</h3>
       {{ shortcut.when }}
     {% endif %}
 
