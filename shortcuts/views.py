@@ -23,6 +23,8 @@ class ShortcutListView(ListView):
 
     def get_queryset(self):
         """Get queryset"""
+        if self.request.GET.get("q"):
+            return Shortcut.objects.filter(default__slug__icontains=self.request.GET.get("q"), deleted_at__isnull=True)
         return Shortcut.objects.filter(deleted_at__isnull=True)
 
     def get_context_data(self, **kwargs):
