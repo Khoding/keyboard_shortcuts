@@ -18,6 +18,9 @@ class Shortcut(auto_prefetch.Model):
     key_in_app = models.CharField(
         max_length=100, blank=True, null=True, help_text="Basically the key but as like 'shift+alt+oem_period'"
     )
+    command = models.CharField(
+        max_length=255, blank=True, null=True, help_text="The command that the shortcut executes."
+    )
     description = models.TextField()
     how_to_activate = models.TextField(
         blank=True, null=True, help_text="If the shortcut isn't possible without some other action, describe it here."

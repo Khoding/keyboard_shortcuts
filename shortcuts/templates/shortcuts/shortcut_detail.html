@@ -9,7 +9,12 @@
     <h1>{{ shortcut }}</h1>
     <h2>{{ shortcut.key }}</h2>
 
-    <p>{% firstof shortcut.prefix "" %} {{ shortcut.description }}</p>
+    <p>{{ shortcut.description }}</p>
+
+    {% if shortcut.command %}
+      <h3>Command</h3>
+      <p>{{ shortcut.command }}</p>
+    {% endif %}
 
     {% if shortcut.how_to_activate %}
       <p>{{ shortcut.how_to_activate }}</p>
