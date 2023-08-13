@@ -17,7 +17,9 @@
     {% endif %}
 
     {% if shortcut.how_to_activate %}
-      <p>{{ shortcut.how_to_activate }}</p>
+      {% load markdown_extras %}
+
+      <p>{{ shortcut.how_to_activate|markdown|safe }}</p>
     {% endif %}
 
     {% if shortcut.default %}

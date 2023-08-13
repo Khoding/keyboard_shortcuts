@@ -22,7 +22,8 @@ INSTALLED_APPS = [
     "tailwind",
     "heroicons",
     "theme",
-    # applications
-    "shortcuts",
+    # Package Apps
     "rest_framework",
+    # Apps
+    "shortcuts",
 ]

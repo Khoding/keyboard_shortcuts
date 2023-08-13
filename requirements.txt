@@ -29,7 +29,6 @@ django==4.2.3
     #   django-auto-prefetch
     #   django-browser-reload
     #   django-filter
-    #   django-markup
     #   django-taggit
     #   django-tailwind
     #   djangorestframework
@@ -44,8 +43,6 @@ django-browser-reload==1.11.0
 django-environ==0.10.0
     # via -r requirements.in
 django-filter==23.2
-    # via -r requirements.in
-django-markup==1.7.2
     # via -r requirements.in
 django-robots==5.0
     # via -r requirements.in
@@ -71,6 +68,8 @@ importlib-metadata==6.8.0
     # via -r requirements.in
 inflection==0.5.1
     # via drf-yasg
+markdown==3.4.4
+    # via -r requirements.in
 mypy-extensions==1.0.0
     # via black
 mysqlclient==2.2.0

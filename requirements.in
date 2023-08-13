@@ -9,8 +9,8 @@ django-simple-history
 rules
 django-widget-tweaks
 django-filter
-django-markup
 django-tailwind
+markdown
 django-browser-reload
 drf-yasg
 mysqlclient
