@@ -14,15 +14,15 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==3.2.0
     # via requests
-click==8.1.6
+click==8.1.7
     # via black
 colorama==0.4.6
     # via click
-cryptography==41.0.2
+cryptography==41.0.3
     # via pyjwt
 defusedxml==0.7.1
     # via python3-openid
-django==4.2.3
+django==4.2.4
     # via
     #   -r requirements.in
     #   django-allauth
@@ -34,7 +34,7 @@ django==4.2.3
     #   djangorestframework
     #   drf-yasg
     #   heroicons
-django-allauth==0.54.0
+django-allauth==0.55.0
     # via -r requirements.in
 django-auto-prefetch==1.7.0
     # via -r requirements.in
