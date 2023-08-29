@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load cards %}
-
+{% load cards paginator_tags heroicons %}
 
 {% block content %}
   <section class="mt-6 pt-10 grid gap-16 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-12">
@@ -10,4 +9,92 @@
       Nothing found here.
     {% endfor %}
   </section>
+
+  {% block pagination %}
+    <section class="py-3 flex items-center justify-between">
+      {% if is_paginated %}
+        <section class="flex-1 flex justify-between md:hidden">
+          {% if page_obj.has_previous %}
+            <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons dark:hover:bg-jumbo-800" rel="noopener noreferrer" tabindex="0">
+              Previous
+            </a>
+          {% else %}
+            <button type="button" disabled class="pagination_next_prev_buttons disabled:opacity-50">
+              Previous
+            </button>
+          {% endif %}
+          {% if page_obj.has_next %}
+            <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons ml-3 dark:hover:bg-jumbo-800" rel="noopener noreferrer" tabindex="0">
+              Next
+            </a>
+          {% else %}
+            <button type="button" disabled class="pagination_next_prev_buttons ml-3 disabled:opacity-50">
+              Next
+            </button>
+          {% endif %}
+        </section>
+
+        <section class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+          <section>
+            <p class="text-sm text-jumbo-700 dark:text-jumbo-200">
+              Showing
+              <span class="font-medium">{{ object_list.count }}</span>
+              of
+              <span class="font-medium">
+                {{ paginator.count }}
+              </span>
+              results
+            </p>
+          </section>
+
+          <section>
+            <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="pagination">
+              {% if page_obj.has_previous %}
+                <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button" rel="noopener noreferrer" tabindex="0">
+                  <span class="sr-only">Previous</span>
+                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
+                </a>
+              {% else %}
+                <button type="button" disabled class="previous_pagination_button disabled:opacity-50">
+                  <span class="sr-only">Previous</span>
+                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
+                </button>
+              {% endif %}
+
+              {% get_proper_elided_page_range paginator page_obj.number as page_range %}
+              {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+                {% if page_obj.number == i %}
+                  <span aria-current="page" class="kho-button-bg kho-button-text kho-button-border kho-button-active z-10 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                    {{ i }}
+                  </span>
+                {% else %}
+                  {% if i == page_obj.paginator.ELLIPSIS %}
+                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-gray-50 text-sm font-medium text-gray-700 dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50">
+                      {{ i }}
+                    </span>
+                  {% else %}
+                    <a href="{% relative_url i 'page' request.GET.urlencode %}" class="kho-button-bg kho-button-bg-hover kho-button-text kho-button-border relative inline-flex items-center px-4 py-2 border text-sm font-medium" rel="noopener noreferrer" tabindex="0">
+                      {{ i }}
+                    </a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button" rel="noopener noreferrer" tabindex="0">
+                  <span class="sr-only">Next</span>
+                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
+                </a>
+              {% else %}
+                <button type="button" disabled class="next_pagination_button disabled:opacity-50">
+                  <span class="sr-only">Next</span>
+                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
+                </button>
+              {% endif %}
+            </nav>
+          </section>
+        </section>
+      {% endif %}
+    </section>
+  {% endblock pagination %}
 {% endblock content %}

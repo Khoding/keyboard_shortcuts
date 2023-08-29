@@ -20,6 +20,8 @@ class ShortcutListView(ListView):
     model = Shortcut
     template_name = "shortcuts/shortcut_list.html"
     context_object_name = "object_list"
+    paginate_by = 20
+    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""
@@ -48,6 +50,8 @@ class ShortcutDetailView(DetailView):
 
     model = Shortcut
     template_name = "shortcuts/shortcut_detail.html"
+    paginate_by = 20
+    paginate_orphans = 5
 
     def get_object(self, queryset=None):
         """Get object"""
@@ -79,6 +83,8 @@ class ShortcutInCategoryListView(ListView):
     model = Category
     template_name = "shortcuts/shortcut_list.html"
     context_object_name = "object_list"
+    paginate_by = 20
+    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""

@@ -46,4 +46,24 @@
     .kho-button-submit-delete {
         @apply bg-flamingo-600 hover:bg-flamingo-700 focus:ring-flamingo-500;
     }
+
+    .next_prev_buttons {
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus inline-flex items-center rounded-xl border px-2.5 py-1.5 text-xs font-medium leading-4 disabled:cursor-not-allowed sm:px-3 sm:py-2 sm:text-sm;
+    }
+
+    .pagination_next_prev_buttons {
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium;
+    }
+
+    .pagination_buttons {
+        @apply kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border kho-button-border-focus relative inline-flex items-center border px-2 py-2 text-sm font-medium disabled:cursor-not-allowed;
+    }
+
+    .next_pagination_button {
+        @apply pagination_buttons rounded-r-xl;
+    }
+
+    .previous_pagination_button {
+        @apply pagination_buttons rounded-l-xl;
+    }
 }
