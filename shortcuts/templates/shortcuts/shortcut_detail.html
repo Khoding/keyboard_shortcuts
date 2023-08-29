@@ -23,14 +23,16 @@
     {% endif %}
 
     {% if shortcut.default %}
-      <h3>Default shortcut</h3>
+      <h3 class="!mb-2">Default shortcut</h3>
+      <div class="italic text-sm text-gray-500 mb-2 font-medium">The default value for this shortcut</div>
 
       <a href="{{ shortcut.default.get_absolute_url }}" class="hover:no-underline">{{ shortcut.default }}</a>
     {% endif %}
 
     {% for sh in shortcut.modified.all %}
       {% if forloop.first %}
-        <h3>Modified shortcuts</h3>
+        <h3 class="!mb-2">Modified shortcuts</h3>
+        <div class="italic text-sm text-gray-500 mb-2 font-medium">All the shortcuts that had this value as their default</div>
       {% endif %}
 
       <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
