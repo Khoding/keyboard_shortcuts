@@ -32,7 +32,7 @@ class ShortcutListView(ListView):
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = "KhoShortcuts"
+        context["title"] = "Khodok's Shortcuts"
         return context
 
 
