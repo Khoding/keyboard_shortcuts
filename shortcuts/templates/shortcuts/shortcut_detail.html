@@ -35,7 +35,9 @@
         <div class="italic text-sm text-gray-500 mb-2 font-medium">All the shortcuts that had this value as their default</div>
       {% endif %}
 
-      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+      {% spaceless %}
+        <a href="{{ sh.get_absolute_url }}" class="hover:no-underline mr-px">{{ sh }} (<span class="text-sm font-mono align-text-bottom">{{ sh.key }}</span>)</a>{% if not forloop.last %},{% endif %}
+      {% endspaceless %}
     {% endfor %}
 
     {% for sh in shortcut.alternative.all %}
@@ -43,7 +45,9 @@
         <h3>Alternative shortcuts</h3>
       {% endif %}
 
-      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+      {% spaceless %}
+        <a href="{{ sh.get_absolute_url }}" class="hover:no-underline mr-px">{{ sh }} (<span class="text-sm font-mono align-text-bottom">{{ sh.key }}</span>)</a>{% if not forloop.last %},{% endif %}
+      {% endspaceless %}
     {% endfor %}
 
     {% for sh in shortcut.related.all %}
@@ -51,7 +55,9 @@
         <h3>Related shortcuts</h3>
       {% endif %}
 
-      <a href="{{ sh.get_absolute_url }}" class="hover:no-underline">{{ sh }}</a>
+      {% spaceless %}
+        <a href="{{ sh.get_absolute_url }}" class="hover:no-underline mr-px">{{ sh }} (<span class="text-sm font-mono align-text-bottom">{{ sh.key }}</span>)</a>{% if not forloop.last %},{% endif %}
+      {% endspaceless %}
     {% endfor %}
 
     {% for application in shortcut.application.all %}
